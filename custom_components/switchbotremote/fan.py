@@ -62,12 +62,12 @@ class SwitchBotRemoteFan(FanEntity, RestoreEntity):
             if sb.type in IR_AIR_PURIFIER_TYPES
             else SPEED_COMMANDS[0]
         )
-        self._supported_features = 0
+        self._supported_features = FanEntityFeature.TURN_ON | FanEntityFeature.TURN_OFF
 
         self._power_sensor = options.get(CONF_POWER_SENSOR, None)
 
         if options.get(CONF_WITH_SPEED, None):
-            self._supported_features = FanEntityFeature.SET_SPEED
+            self._supported_features |= FanEntityFeature.SET_SPEED
 
         if sb.type not in IR_AIR_PURIFIER_TYPES:
             self._supported_features |= FanEntityFeature.OSCILLATE
